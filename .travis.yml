@@ -14,7 +14,7 @@ after_success:
   - docker build -t johnjude/multi-worker ./worker
   - docker build -t johnjude/multi-nginx ./nginx
   #login to dock bub
-  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password stdin
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
   #push images to docker hub
   - push johnjude/multi-client
   - push johnjude/multi-nginx
