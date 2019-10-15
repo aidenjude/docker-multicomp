@@ -1,0 +1,22 @@
+sudo: required
+services:
+  - docker
+
+before_install:
+  - docker build -t johnjude/react-test -f ./client/Dockerfile.dev ./client
+
+script:
+  - docker run -e CI=true johnjude/react-test npm test
+
+after_success:
+  - docker build -t johnjude/multi-client ./client
+  - docker build -t johnjude/multi-server ./server
+  - docker build -t johnjude/multi-worker ./worker
+  - docker build -t johnjude/multi-nginx ./nginx
+  #login to dock bub
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password stdin
+  #push images to docker hub
+  - push johnjude/multi-client
+  - push johnjude/multi-nginx
+  - push johnjude/multi-server
+  - push johnjude/multi-worker
