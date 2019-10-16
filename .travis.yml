@@ -16,7 +16,7 @@ after_success:
   #login to dock bub
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
   #push images to docker hub
-  - push johnjude/multi-client
-  - push johnjude/multi-nginx
-  - push johnjude/multi-server
-  - push johnjude/multi-worker
+  - docker push johnjude/multi-client
+  - docker push johnjude/multi-nginx
+  - docker push johnjude/multi-server
+  - docker push johnjude/multi-worker
